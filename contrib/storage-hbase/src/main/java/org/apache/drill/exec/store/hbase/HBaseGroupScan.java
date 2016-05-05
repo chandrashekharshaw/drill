@@ -106,6 +106,7 @@ public class HBaseGroupScan extends AbstractGroupScan implements DrillHBaseConst
                         @JsonProperty("columns") List<SchemaPath> columns,
                         @JacksonInject StoragePluginRegistry pluginRegistry) throws IOException, ExecutionSetupException {
     this (userName, (HBaseStoragePlugin) pluginRegistry.getPlugin(storagePluginConfig), hbaseScanSpec, columns);
+    logger.info("INSTANTIATED A GROUP SCAN OV1: " + this);
   }
 
   public HBaseGroupScan(String userName, HBaseStoragePlugin storagePlugin, HBaseScanSpec scanSpec,
@@ -116,6 +117,7 @@ public class HBaseGroupScan extends AbstractGroupScan implements DrillHBaseConst
     this.hbaseScanSpec = scanSpec;
     this.columns = columns == null ? ALL_COLUMNS : columns;
     init();
+    logger.info("INSTANTIATED A GROUP SCAN OV2: " + this);
   }
 
   /**
@@ -134,6 +136,7 @@ public class HBaseGroupScan extends AbstractGroupScan implements DrillHBaseConst
     this.filterPushedDown = that.filterPushedDown;
     this.statsCalculator = that.statsCalculator;
     this.scanSizeInBytes = that.scanSizeInBytes;
+    logger.info("INSTANTIATED A GROUP SCAN OV3: " + this);
   }
 
   @Override

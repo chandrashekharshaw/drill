@@ -45,6 +45,9 @@ public class HBaseStoragePlugin extends AbstractStoragePlugin {
 
   public HBaseStoragePlugin(HBaseStoragePluginConfig configuration, DrillbitContext context, String name)
       throws IOException {
+    
+    logger.info("INSTANTIATED HBASE PLUGIN!  Name: " + name);
+    logger.info("Starting with context: " + context);
     this.context = context;
     this.schemaFactory = new HBaseSchemaFactory(this, name);
     this.engineConfig = configuration;
@@ -62,12 +65,19 @@ public class HBaseStoragePlugin extends AbstractStoragePlugin {
 
   @Override
   public HBaseGroupScan getPhysicalScan(String userName, JSONOptions selection) throws IOException {
+    
+    logger.info("GETTING PHYSICAL SCAN FROM PLUGIN FOR user: " + userName);
+    
+    
     HBaseScanSpec scanSpec = selection.getListWith(new ObjectMapper(), new TypeReference<HBaseScanSpec>() {});
+    logger.info("   Got scan spec: " + scanSpec); // needs flattening
     return new HBaseGroupScan(userName, this, scanSpec, null);
   }
 
   @Override
   public void registerSchemas(SchemaConfig schemaConfig, SchemaPlus parent) throws IOException {
+    logger.info("Registering schema with config: " + schemaConfig);
+    logger.info("Registering schema with parent: " + parent);
     schemaFactory.registerSchemas(schemaConfig, parent);
   }
 

@@ -64,6 +64,7 @@ public class HBaseSubScan extends AbstractBase implements SubScan {
     this.regionScanSpecList = regionScanSpecList;
     this.storage = (HBaseStoragePluginConfig) storage;
     this.columns = columns;
+    logger.info("INSTANTIATED A SUB SCAN OV1: " + this);
   }
 
   public HBaseSubScan(String userName, HBaseStoragePlugin plugin, HBaseStoragePluginConfig config,
@@ -73,6 +74,7 @@ public class HBaseSubScan extends AbstractBase implements SubScan {
     storage = config;
     this.regionScanSpecList = regionInfoList;
     this.columns = columns;
+    logger.info("INSTANTIATED A SUB SCAN OV2: " + this);
   }
 
   public List<HBaseSubScanSpec> getRegionScanSpecList() {

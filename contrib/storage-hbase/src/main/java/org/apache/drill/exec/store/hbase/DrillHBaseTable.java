@@ -60,6 +60,7 @@ public class DrillHBaseTable extends DrillTable implements DrillHBaseConstants {
       fieldNameList.add(Bytes.toString(family));
       typeList.add(typeFactory.createMapType(typeFactory.createSqlType(SqlTypeName.VARCHAR), typeFactory.createSqlType(SqlTypeName.ANY)));
     }
+    logger.info("GETTING A ROW TYPE: " + typeFactory.createStructType(typeList, fieldNameList));
     return typeFactory.createStructType(typeList, fieldNameList);
   }
 

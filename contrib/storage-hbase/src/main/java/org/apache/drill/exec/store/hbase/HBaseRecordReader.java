@@ -79,6 +79,7 @@ public class HBaseRecordReader extends AbstractRecordReader implements DrillHBas
 
   public HBaseRecordReader(Configuration conf, HBaseSubScan.HBaseSubScanSpec subScanSpec,
       List<SchemaPath> projectedColumns, FragmentContext context) {
+    
     hbaseConf = conf;
     hbaseTableName = Preconditions.checkNotNull(subScanSpec, "HBase reader needs a sub-scan spec").getTableName();
     hbaseScan = new Scan(subScanSpec.getStartRow(), subScanSpec.getStopRow());
@@ -87,6 +88,7 @@ public class HBaseRecordReader extends AbstractRecordReader implements DrillHBas
         .setCaching(TARGET_RECORD_COUNT);
 
     setColumns(projectedColumns);
+    logger.info("INSTANTIATED RECORD READER -> Table: " + hbaseTableName + " scan: " + hbaseScan + " projectedColumsn: " + projectedColumns);
   }
 
   @Override

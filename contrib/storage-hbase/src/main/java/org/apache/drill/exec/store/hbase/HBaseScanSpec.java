@@ -27,7 +27,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class HBaseScanSpec {
-
+  static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(HBaseScanSpec.class);
+  
   protected String tableName;
   protected byte[] startRow;
   protected byte[] stopRow;
@@ -51,6 +52,7 @@ public class HBaseScanSpec {
     } else {
       this.filter = HBaseUtils.deserializeFilter(serializedFilter);
     }
+    logger.info("INSTANTIATED A SCAN SPEC OV1: " + this);
   }
 
   public HBaseScanSpec(String tableName, byte[] startRow, byte[] stopRow, Filter filter) {
@@ -58,10 +60,12 @@ public class HBaseScanSpec {
     this.startRow = startRow;
     this.stopRow = stopRow;
     this.filter = filter;
+    logger.info("INSTANTIATED A SCAN SPEC OV2: " + this);
   }
 
   public HBaseScanSpec(String tableName) {
     this.tableName = tableName;
+    logger.info("INSTANTIATED A SCAN SPEC OV3: " + this);
   }
 
   public String getTableName() {
